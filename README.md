@@ -1,58 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# My Kost
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem manajemen kos terpadu berbasis web untuk pemilik, penghuni, dan calon penghuni.
 
-## About Laravel
+Dibuat oleh **Keisha Nabila Azzahra** (255150707111071)
+Mata kuliah Pengembangan Aplikasi Web (E), Teknologi Informasi, Fakultas Ilmu Komputer, Universitas Brawijaya.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Latar Belakang
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Banyak kos masih dikelola secara manual lewat buku catatan atau chat WhatsApp. Akibatnya data penghuni dan pembayaran mudah salah atau hilang, pemilik sering lupa siapa yang belum membayar, keluhan penghuni tidak punya status yang jelas, dan calon penghuni sulit mengetahui kamar yang tersedia. My Kost mengumpulkan semua proses itu dalam satu website.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Fitur
 
-## Learning Laravel
+| Peran | Fitur |
+|---|---|
+| Publik | Landing page, katalog kamar dengan filter, detail kamar, login, register |
+| Calon penghuni | Booking kamar |
+| Penghuni | Dashboard, tagihan, unggah bukti bayar, unduh kuitansi PDF, keluhan dengan foto, pengumuman, perpanjang atau akhiri kontrak |
+| Pemilik dan admin | Kelola kamar, booking, penghuni dan kontrak, tagihan dan verifikasi pembayaran, penanganan keluhan |
+| Khusus pemilik | Laporan keuangan dengan grafik, pengumuman |
+| Otomatis | Tagihan bulanan (tanggal 1), pengingat jatuh tempo lewat email atau WhatsApp |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Teknologi
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Laravel (PHP) dan Blade
+- Laravel Breeze (autentikasi)
+- Tailwind CSS dan JavaScript (Vite)
+- MySQL
+- DomPDF (kuitansi PDF)
+- Chart.js (grafik laporan)
+- Figma (desain antarmuka)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Cara Menjalankan
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Kebutuhan: PHP 8.2 atau lebih baru, Composer, Node.js, dan MySQL.
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/keishaashshsh/my-kost.git
+cd my-kost
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Buat database kosong bernama `mykost`, lalu isi pengaturan database di file `.env`:
 
-## Contributing
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mykost
+DB_USERNAME=root
+DB_PASSWORD=
+MAIL_MAILER=log
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Lanjutkan dengan:
 
-## Code of Conduct
+```bash
+php artisan storage:link
+php artisan migrate --seed
+npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Di jendela Terminal kedua:
 
-## Security Vulnerabilities
+```bash
+php artisan serve
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Buka http://127.0.0.1:8000
 
-## License
+## Akun Demo
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Password semua akun: `password`
+
+| Peran | Email |
+|---|---|
+| Pemilik | owner@mykost.test |
+| Admin | admin@mykost.test |
+| Penghuni | budi@mykost.test |
+
+## Alur Penggunaan
+
+1. Calon penghuni mendaftar, memilih kamar, lalu booking.
+2. Pemilik mengonfirmasi booking, dan penghuni otomatis tercatat beserta kontraknya.
+3. Setiap tanggal 1, sistem membuat tagihan. Pemilik mengisi pemakaian listrik dan air.
+4. Penghuni mengunggah bukti bayar, lalu pemilik memverifikasinya.
+5. Setelah verifikasi, kuitansi PDF dapat diunduh dan laporan keuangan diperbarui.
+
+## Perintah Terjadwal
+
+| Perintah | Fungsi | Jadwal |
+|---|---|---|
+| `php artisan bills:generate` | Membuat tagihan bulan ini untuk kontrak aktif | Tanggal 1, pukul 00.05 |
+| `php artisan bills:remind` | Mengirim pengingat tagihan yang jatuh tempo dalam 3 hari | Setiap hari pukul 08.00 |
+
+Untuk menjalankan jadwal di komputer sendiri: `php artisan schedule:work`.
+Pengingat WhatsApp bersifat opsional dan memakai Fonnte (isi `FONNTE_TOKEN` di `.env`). Tarif listrik dan air diatur di `config/mykost.php`.
+
+## Struktur Penting
+
+| Lokasi | Isi |
+|---|---|
+| `routes/web.php` | Semua rute aplikasi |
+| `app/Http/Controllers/` | Logika tiap fitur (Room, Booking, Bill, Complaint, Report, dan lain-lain) |
+| `app/Http/Middleware/RoleMiddleware.php` | Pembatasan akses berdasarkan peran |
+| `app/Console/Commands/` | Pembuat tagihan dan pengirim pengingat |
+| `app/Models/` | Model data |
+| `database/migrations/` | Struktur tabel |
+| `resources/views/` | Tampilan halaman (Blade) |
+| `resources/views/pdf/receipt.blade.php` | Template kuitansi PDF |
+
+## Rencana Pengembangan
+
+- Pembayaran online (virtual account atau QRIS)
+- Aplikasi mobile atau PWA
+- Manajemen banyak cabang kos
+- Pembacaan meteran listrik dan air otomatis
