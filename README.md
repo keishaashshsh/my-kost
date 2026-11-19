@@ -1,38 +1,51 @@
+Nama: Keisha Nabila Azzahra
+NIM: 255150707111071
+
 # My Kost
 
-Sistem manajemen kos terpadu berbasis web untuk pemilik, penghuni, dan calon penghuni.
-
-Dibuat oleh **Keisha Nabila Azzahra** (255150707111071)
-Mata kuliah Pengembangan Aplikasi Web (E), Teknologi Informasi, Fakultas Ilmu Komputer, Universitas Brawijaya.
+Sistem manajemen kos terpadu berbasis web untuk pemilik, penghuni, dan calon penghuni. Project ini disusun sebagai tugas mata kuliah Pengembangan Aplikasi Web (E).
 
 ## Latar Belakang
 
-Banyak kos masih dikelola secara manual lewat buku catatan atau chat WhatsApp. Akibatnya data penghuni dan pembayaran mudah salah atau hilang, pemilik sering lupa siapa yang belum membayar, keluhan penghuni tidak punya status yang jelas, dan calon penghuni sulit mengetahui kamar yang tersedia. My Kost mengumpulkan semua proses itu dalam satu website.
+Pengelolaan kos di banyak tempat masih dilakukan secara manual menggunakan buku catatan atau pesan WhatsApp. Kondisi ini menimbulkan beberapa kendala, yaitu data penghuni dan pembayaran yang rawan salah atau hilang, pemilik yang kesulitan memantau tunggakan, keluhan penghuni yang tidak memiliki status penanganan yang jelas, serta calon penghuni yang sulit memperoleh informasi kamar terkini. My Kost dikembangkan untuk mengelola seluruh proses tersebut secara terpusat.
 
 ## Fitur
 
-| Peran | Fitur |
-|---|---|
-| Publik | Landing page, katalog kamar dengan filter, detail kamar, login, register |
-| Calon penghuni | Booking kamar |
-| Penghuni | Dashboard, tagihan, unggah bukti bayar, unduh kuitansi PDF, keluhan dengan foto, pengumuman, perpanjang atau akhiri kontrak |
-| Pemilik dan admin | Kelola kamar, booking, penghuni dan kontrak, tagihan dan verifikasi pembayaran, penanganan keluhan |
-| Khusus pemilik | Laporan keuangan dengan grafik, pengumuman |
-| Otomatis | Tagihan bulanan (tanggal 1), pengingat jatuh tempo lewat email atau WhatsApp |
+**Halaman Publik**
+- Landing page dan katalog kamar dengan filter tipe, harga, dan fasilitas
+- Detail kamar dengan foto
+- Login dan registrasi
+
+**Calon Penghuni dan Penghuni**
+- Pemesanan (booking) kamar
+- Dashboard informasi kamar dan status pembayaran
+- Tagihan, unggah bukti pembayaran, dan unduh kuitansi PDF
+- Pengiriman keluhan beserta foto dan pelacakan status (Diterima, Diproses, Selesai)
+- Pengumuman serta perpanjangan atau pengakhiran kontrak
+
+**Pemilik dan Admin**
+- Manajemen kamar, booking, penghuni, dan kontrak
+- Pembuatan tagihan, perhitungan listrik dan air berdasarkan meteran, serta verifikasi pembayaran
+- Penanganan keluhan
+- Khusus pemilik: laporan keuangan dengan grafik dan pengumuman
+
+**Otomatisasi**
+- Pembuatan tagihan bulanan setiap tanggal 1
+- Pengingat jatuh tempo melalui email (WhatsApp bersifat opsional)
 
 ## Teknologi
 
 - Laravel (PHP) dan Blade
 - Laravel Breeze (autentikasi)
-- Tailwind CSS dan JavaScript (Vite)
+- Tailwind CSS dan JavaScript
 - MySQL
 - DomPDF (kuitansi PDF)
 - Chart.js (grafik laporan)
-- Figma (desain antarmuka)
+- Figma (perancangan antarmuka)
 
-## Cara Menjalankan
+## Instalasi dan Menjalankan Aplikasi
 
-Kebutuhan: PHP 8.2 atau lebih baru, Composer, Node.js, dan MySQL.
+Prasyarat: PHP 8.2 atau lebih baru, Composer, Node.js, dan MySQL.
 
 ```bash
 git clone https://github.com/keishaashshsh/my-kost.git
@@ -43,7 +56,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Buat database kosong bernama `mykost`, lalu isi pengaturan database di file `.env`:
+Buat database kosong bernama `mykost`, kemudian atur berkas `.env`:
 
 ```
 DB_CONNECTION=mysql
@@ -55,7 +68,7 @@ DB_PASSWORD=
 MAIL_MAILER=log
 ```
 
-Lanjutkan dengan:
+Lanjutkan dengan perintah berikut:
 
 ```bash
 php artisan storage:link
@@ -63,17 +76,11 @@ php artisan migrate --seed
 npm run dev
 ```
 
-Di jendela Terminal kedua:
-
-```bash
-php artisan serve
-```
-
-Buka http://127.0.0.1:8000
+Pada jendela terminal kedua, jalankan `php artisan serve`, lalu akses http://127.0.0.1:8000
 
 ## Akun Demo
 
-Password semua akun: `password`
+Kata sandi seluruh akun adalah `password`.
 
 | Peran | Email |
 |---|---|
@@ -81,38 +88,40 @@ Password semua akun: `password`
 | Admin | admin@mykost.test |
 | Penghuni | budi@mykost.test |
 
-## Alur Penggunaan
+## Alur Sistem
 
-1. Calon penghuni mendaftar, memilih kamar, lalu booking.
-2. Pemilik mengonfirmasi booking, dan penghuni otomatis tercatat beserta kontraknya.
+1. Calon penghuni mendaftar, memilih kamar, dan melakukan booking.
+2. Pemilik mengonfirmasi booking, sehingga penghuni dan kontraknya tercatat otomatis.
 3. Setiap tanggal 1, sistem membuat tagihan. Pemilik mengisi pemakaian listrik dan air.
-4. Penghuni mengunggah bukti bayar, lalu pemilik memverifikasinya.
-5. Setelah verifikasi, kuitansi PDF dapat diunduh dan laporan keuangan diperbarui.
+4. Penghuni mengunggah bukti pembayaran, kemudian pemilik memverifikasinya.
+5. Kuitansi PDF diterbitkan dan laporan keuangan diperbarui.
 
 ## Perintah Terjadwal
 
 | Perintah | Fungsi | Jadwal |
 |---|---|---|
-| `php artisan bills:generate` | Membuat tagihan bulan ini untuk kontrak aktif | Tanggal 1, pukul 00.05 |
+| `php artisan bills:generate` | Membuat tagihan bulan berjalan untuk kontrak aktif | Tanggal 1, pukul 00.05 |
 | `php artisan bills:remind` | Mengirim pengingat tagihan yang jatuh tempo dalam 3 hari | Setiap hari pukul 08.00 |
 
-Untuk menjalankan jadwal di komputer sendiri: `php artisan schedule:work`.
-Pengingat WhatsApp bersifat opsional dan memakai Fonnte (isi `FONNTE_TOKEN` di `.env`). Tarif listrik dan air diatur di `config/mykost.php`.
+Pada lingkungan lokal, penjadwalan dapat dijalankan dengan `php artisan schedule:work`. Tarif listrik dan air diatur pada `config/mykost.php`. Pengingat WhatsApp memerlukan `FONNTE_TOKEN` pada berkas `.env`.
 
-## Struktur Penting
+## Struktur Direktori Utama
 
-| Lokasi | Isi |
+| Lokasi | Keterangan |
 |---|---|
-| `routes/web.php` | Semua rute aplikasi |
-| `app/Http/Controllers/` | Logika tiap fitur (Room, Booking, Bill, Complaint, Report, dan lain-lain) |
+| `routes/web.php` | Seluruh rute aplikasi |
+| `app/Http/Controllers/` | Logika setiap fitur |
 | `app/Http/Middleware/RoleMiddleware.php` | Pembatasan akses berdasarkan peran |
-| `app/Console/Commands/` | Pembuat tagihan dan pengirim pengingat |
+| `app/Console/Commands/` | Pembuatan tagihan dan pengiriman pengingat |
 | `app/Models/` | Model data |
 | `database/migrations/` | Struktur tabel |
-| `resources/views/` | Tampilan halaman (Blade) |
-| `resources/views/pdf/receipt.blade.php` | Template kuitansi PDF |
+| `resources/views/` | Tampilan halaman (Blade), termasuk `pdf/receipt.blade.php` untuk kuitansi |
 
-## Rencana Pengembangan
+## Catatan Pengembangan
+
+Sebagian kode project ini dikembangkan dengan bantuan AI (Claude), kemudian dijalankan, diuji, dan disesuaikan oleh penulis.
+
+## Rencana Pengembangan Lanjutan
 
 - Pembayaran online (virtual account atau QRIS)
 - Aplikasi mobile atau PWA
