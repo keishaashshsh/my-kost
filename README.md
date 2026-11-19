@@ -117,10 +117,6 @@ Pada lingkungan lokal, penjadwalan dapat dijalankan dengan `php artisan schedule
 | `database/migrations/` | Struktur tabel |
 | `resources/views/` | Tampilan halaman (Blade), termasuk `pdf/receipt.blade.php` untuk kuitansi |
 
-## Catatan Pengembangan
-
-Sebagian kode project ini dikembangkan dengan bantuan AI (Claude), kemudian dijalankan, diuji, dan disesuaikan oleh penulis.
-
 ## Rencana Pengembangan Lanjutan
 
 - Pembayaran online (virtual account atau QRIS)
